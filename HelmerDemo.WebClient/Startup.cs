@@ -8,13 +8,25 @@ namespace HelmerDemo.WebClient
 
     using WE.POC.CommonCode.Helpers;
 
+    /// <summary>
+    /// The startup.
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Startup"/> class.
+        /// </summary>
+        /// <param name="configuration">
+        /// The configuration.
+        /// </param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// Gets the configuration.
+        /// </summary>
         public IConfiguration Configuration { get; }
 
         /// <summary>
