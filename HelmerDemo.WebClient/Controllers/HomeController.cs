@@ -67,17 +67,6 @@
         }
 
         /// <summary>
-        /// The privacy.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="IActionResult"/>.
-        /// </returns>
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        /// <summary>
         /// The error.
         /// </summary>
         /// <returns>

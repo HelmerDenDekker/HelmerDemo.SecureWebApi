@@ -11,6 +11,7 @@
     /// </summary>
     public class DemoRestClient : IDemoRestClient
     {
+        
         /// <inheritdoc />
         public async Task<RestClient> Create(string baseUrl)
         {
@@ -18,8 +19,9 @@
             ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
 
             var client = new RestClient(baseUrl);
-
             client.UseSerializer(() => new JsonDeserializer());
+            client.AddDefaultHeader("X-API-KEY", "TestSecret");
+
             return client;
         }
     }
