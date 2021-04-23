@@ -1,5 +1,8 @@
 namespace HelmerDemo.SecureWebApi
 {
+    using HelmerDemo.SecureWebApi.Authorization;
+
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
@@ -35,7 +38,17 @@ namespace HelmerDemo.SecureWebApi
         /// </param>
         public void ConfigureServices(IServiceCollection services)
         {
+            
+            services.AddHttpContextAccessor();
             services.AddControllers();
+
+
+            services.AddAuthorization(
+                options =>
+                    {
+                        options.AddPolicy("HasApiKey", policy => policy.Requirements.Add(new HasApiKeyRequirement()));
+                    });
+            services.AddScoped<IAuthorizationHandler, HasApiKeyHandler>();
         }
 
 
