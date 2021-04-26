@@ -12,6 +12,9 @@
     /// </summary>
     public class ClaimRequirementFilter : IAuthorizationFilter
     {
+        /// <summary>
+        /// The claim private field.
+        /// </summary>
         private Claim _claim;
 
         /// <summary>
@@ -47,6 +50,13 @@
         /// </param>
         private static void ClientHasKey(AuthorizationFilterContext context)
         {
+            var httpContext = context.HttpContext;
+            if (httpContext == null)
+            {
+                context.Result = new BadRequestResult();
+                return;
+            }
+
             var keyName = "X-API-KEY";
             if (!context.HttpContext.Request.Headers.Keys.Contains(keyName))
             {

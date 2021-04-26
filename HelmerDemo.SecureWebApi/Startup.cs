@@ -39,7 +39,6 @@ namespace HelmerDemo.SecureWebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            //services.AddScoped<IAuthorizationFilter, ClaimRequirementFilter>();
         }
 
 

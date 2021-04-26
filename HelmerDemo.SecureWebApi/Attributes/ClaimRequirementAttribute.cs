@@ -1,19 +1,8 @@
 ﻿namespace HelmerDemo.SecureWebApi.Attributes
 {
-    using System;
-    using System.Linq;
-    using System.Net;
-    using System.Net.Http;
     using System.Security.Claims;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using System.Web.Http.Controllers;
 
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Filters;
-
-    using IAuthorizationFilter = System.Web.Http.Filters.IAuthorizationFilter;
 
     /// <summary>
     /// The key requirement attribute.
