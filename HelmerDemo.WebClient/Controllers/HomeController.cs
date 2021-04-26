@@ -59,7 +59,7 @@
         /// </returns>
         public async Task<IActionResult> Index()
         {
-            var client = await this._demoRestclient.Create(_baseUrl);
+            var client = await this._demoRestclient.CreateOpenClient(_baseUrl);
             var request = this._restRequestFactory.Get("api/opentest");
             var response = client.Execute(request);
             var viewModel = new HomeViewModel { Response = response.Content };

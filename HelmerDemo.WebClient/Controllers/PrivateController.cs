@@ -51,7 +51,7 @@
         /// </returns>
         public async Task<ActionResult> Index()
         {
-            var client = await this._demoRestClient.Create(_baseUrl);
+            var client = await this._demoRestClient.CreateSecuredClient(_baseUrl);
             var request = this._restRequestFactory.Get("api/keysecured");
             var response = client.Execute(request);
             var viewModel = new PrivateViewModel { Message = response.Content };

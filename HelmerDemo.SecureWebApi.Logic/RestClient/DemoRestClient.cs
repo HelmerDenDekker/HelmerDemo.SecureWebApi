@@ -13,7 +13,19 @@
     {
         
         /// <inheritdoc />
-        public async Task<RestClient> Create(string baseUrl)
+        public async Task<RestClient> CreateOpenClient(string baseUrl)
+        {
+            //NEVER Let this go to production! Ignores TLS (SSL) issues
+            ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
+
+            var client = new RestClient(baseUrl);
+            client.UseSerializer(() => new JsonDeserializer());
+            
+            return client;
+        }
+
+        /// <inheritdoc />
+        public async Task<RestClient> CreateSecuredClient(string baseUrl)
         {
             //NEVER Let this go to production! Ignores TLS (SSL) issues
             ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
