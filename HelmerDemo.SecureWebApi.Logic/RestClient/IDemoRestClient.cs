@@ -10,7 +10,7 @@
     public interface IDemoRestClient
     {
         /// <summary>
-        /// Creates a new rest client.
+        /// Creates a new non-secured rest client.
         /// </summary>
         /// <param name="baseUrl">
         /// The base url.
@@ -18,6 +18,17 @@
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        Task<RestClient> Create(string baseUrl);
+        Task<RestClient> CreateOpenClient(string baseUrl);
+
+        /// <summary>
+        /// Creates a new secured rest client.
+        /// </summary>
+        /// <param name="baseUrl">
+        /// The base url.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Task"/>.
+        /// </returns>
+        Task<RestClient> CreateSecuredClient(string baseUrl);
     }
 }
