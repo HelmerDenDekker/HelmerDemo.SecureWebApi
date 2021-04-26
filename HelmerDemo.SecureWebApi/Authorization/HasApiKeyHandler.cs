@@ -54,7 +54,6 @@
             var apiKey = "X-API-KEY";
             if (!httpContext.Request.Headers.Keys.Contains(apiKey))
             {
-                
                 return Task.CompletedTask;
             }
 

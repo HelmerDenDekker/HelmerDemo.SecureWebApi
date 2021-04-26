@@ -1,10 +1,11 @@
 ﻿namespace HelmerDemo.SecureWebApi.Controllers
 {
-    
-
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    /// <summary>
+    /// The key secured controller.
+    /// </summary>
     [Authorize(Policy = "HasApiKey")]
     [Route("api/[controller]")]
     [ApiController]
