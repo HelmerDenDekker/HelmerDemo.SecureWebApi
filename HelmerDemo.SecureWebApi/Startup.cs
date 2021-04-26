@@ -1,7 +1,10 @@
 namespace HelmerDemo.SecureWebApi
 {
+    using HelmerDemo.SecureWebApi.Attributes;
+
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc.Filters;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
@@ -36,6 +39,7 @@ namespace HelmerDemo.SecureWebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            //services.AddScoped<IAuthorizationFilter, ClaimRequirementFilter>();
         }
 
 

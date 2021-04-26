@@ -4,7 +4,10 @@
 
     using Microsoft.AspNetCore.Mvc;
 
-    [KeyAuthorize]
+    /// <summary>
+    /// The key secured controller.
+    /// </summary>
+    [ClaimRequirement("Permission", "HasKey")]
     [Route("api/[controller]")]
     [ApiController]
     public class KeySecuredController : ControllerBase
