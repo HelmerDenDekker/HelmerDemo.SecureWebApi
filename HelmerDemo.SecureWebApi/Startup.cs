@@ -1,11 +1,13 @@
 namespace HelmerDemo.SecureWebApi
 {
+    using IdentityServer4.AccessTokenValidation;
+
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-
+    
     /// <summary>
     /// The startup class.
     /// </summary>
@@ -27,6 +29,17 @@ namespace HelmerDemo.SecureWebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddCors();
+            services.AddAuthorization();
+            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+                .AddIdentityServerAuthentication(
+                    options =>
+                        {
+                            options.Authority = "https://demo.identityserver.io/";
+                            options.ApiName = "api";
+                        });
+            
         }
 
 
@@ -41,6 +54,15 @@ namespace HelmerDemo.SecureWebApi
         /// </param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(
+                policy =>
+                    {
+                        policy.WithOrigins("https://localhost:44300");
+                        policy.AllowAnyHeader();
+                        policy.AllowAnyMethod();
+                        policy.WithExposedHeaders("WWW-Authenticate");
+                    });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -49,7 +71,7 @@ namespace HelmerDemo.SecureWebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
