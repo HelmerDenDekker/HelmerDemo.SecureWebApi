@@ -31,7 +31,6 @@ namespace HelmerDemo.SecureWebApi
             services.AddControllers();
 
             services.AddCors();
-            services.AddAuthorization();
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
                 .AddIdentityServerAuthentication(
                     options =>
