@@ -35,7 +35,7 @@ namespace HelmerDemo.SecureWebApi
                 .AddIdentityServerAuthentication(
                     options =>
                         {
-                            options.Authority = "https://demo.identityserver.io/";
+                            options.Authority = "https://localhost:5001/";
                             options.ApiName = "api";
                         });
             
