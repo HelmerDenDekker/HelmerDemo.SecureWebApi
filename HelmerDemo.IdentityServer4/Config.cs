@@ -42,7 +42,8 @@ namespace HelmerDemo.IdentityServer
                 new Client
                 {
                     ClientId = "js_oidc",
-                    
+                    RedirectUris = new List<string>{ "https://localhost:44301/callback.html" },
+                    PostLogoutRedirectUris = new List<string>{"https://localhost:44301/index.html"},
                     AllowedGrantTypes = GrantTypes.Code,
                     // scopes that client has access to
                     AllowedScopes = { IdentityServerConstants.StandardScopes.Email, "api" }
@@ -54,18 +55,20 @@ namespace HelmerDemo.IdentityServer
                     ClientId = "mvc",
                     ClientSecrets = { new Secret("secret".Sha256()) },
 
-                    AllowedGrantTypes = GrantTypes.Code,
+                    AllowedGrantTypes = GrantTypes.Hybrid,
                     
                     // where to redirect to after login
-                    RedirectUris = { "https://localhost:5002/signin-oidc" },
+                    RedirectUris = { "https://localhost:44372/signin-oidc" },
 
                     // where to redirect to after logout
-                    PostLogoutRedirectUris = { "https://localhost:5002/signout-callback-oidc" },
+                    PostLogoutRedirectUris = { "https://localhost:44372/signout-callback-oidc" },
 
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "api"
+
                     }
                 }
             };

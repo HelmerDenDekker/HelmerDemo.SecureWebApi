@@ -1,5 +1,7 @@
 namespace HelmerDemo.WebClient
 {
+    using System.IdentityModel.Tokens.Jwt;
+
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
@@ -38,6 +40,31 @@ namespace HelmerDemo.WebClient
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); //turn off the JWT claim type mapping to allow well-known claims to flow through
+
+            services.AddAuthentication(
+                options =>
+                    {
+                        options.DefaultScheme = "Cookies";
+                        options.DefaultChallengeScheme = "oidc";
+                    }).AddCookie("cookie").AddOpenIdConnect(
+                "oidc",
+                options =>
+                    {
+                        options.Authority = "https://localhost:5001/";
+                        options.ClientId = "mvc";
+                        options.ClientSecret = "secret";
+                        options.ResponseType = "code id_token";
+                        
+                        options.RequireHttpsMetadata = false;
+                        options.GetClaimsFromUserInfoEndpoint = true;
+                        options.SaveTokens = true;
+                        options.Scope.Add("api");
+
+                    });
+
+                
 
             // Register dependency injection
             services.AddScoped<IDemoRestClient, DemoRestClient>();
