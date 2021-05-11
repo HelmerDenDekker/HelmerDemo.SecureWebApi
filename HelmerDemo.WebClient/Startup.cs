@@ -97,6 +97,7 @@ namespace HelmerDemo.WebClient
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
