@@ -18,6 +18,6 @@
         /// <returns>
         /// The <see cref="Task"/>.
         /// </returns>
-        Task<RestClient> Create(string baseUrl);
+        RestClient Create(string baseUrl);
     }
 }

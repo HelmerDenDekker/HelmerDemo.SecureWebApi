@@ -24,13 +24,13 @@ namespace HelmerDemo.IdentityServer
             };
 
         /// <summary>
-        /// The api scopes.
+        /// The API scopes.
         /// </summary>
         public static IEnumerable<ApiScope> ApiScopes =>
             new List<ApiScope>
-            {
-                new ApiScope("api", "Secure Web API")
-            };
+                {
+                    new ApiScope("api", "Secure Web API")
+                };
 
         /// <summary>
         /// The clients.
@@ -46,7 +46,8 @@ namespace HelmerDemo.IdentityServer
                     PostLogoutRedirectUris = new List<string>{"https://localhost:44301/index.html"},
                     AllowedGrantTypes = GrantTypes.Code,
                     // scopes that client has access to
-                    AllowedScopes = { IdentityServerConstants.StandardScopes.Email, "api" }
+                    AllowedScopes = { IdentityServerConstants.StandardScopes.Email, "api" },
+                    AllowedCorsOrigins = new List<string>{"https://localhost:44301"}
                 },
                 
                 // interactive ASP.NET Core MVC client
@@ -54,7 +55,7 @@ namespace HelmerDemo.IdentityServer
                 {
                     ClientId = "mvc",
                     ClientSecrets = { new Secret("secret".Sha256()) },
-
+                    RequirePkce = false,
                     AllowedGrantTypes = GrantTypes.Hybrid,
                     
                     // where to redirect to after login
@@ -68,8 +69,8 @@ namespace HelmerDemo.IdentityServer
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         "api"
-
-                    }
+                    },
+                    AllowedCorsOrigins = new List<string>{"https://localhost:44732"}
                 }
             };
     }

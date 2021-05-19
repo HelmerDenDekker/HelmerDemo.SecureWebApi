@@ -12,9 +12,9 @@
     public class DemoRestClient : IDemoRestClient
     {
         /// <inheritdoc />
-        public async Task<RestClient> Create(string baseUrl)
+        public RestClient Create(string baseUrl)
         {
-            //NEVER Let this go to production! Ignores TLS (SSL) issues
+            // NEVER Let this go to production! Ignores TLS (SSL) issues
             ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
 
             var client = new RestClient(baseUrl);

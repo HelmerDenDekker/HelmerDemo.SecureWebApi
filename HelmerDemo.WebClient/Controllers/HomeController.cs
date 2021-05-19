@@ -59,22 +59,11 @@
         /// </returns>
         public async Task<IActionResult> Index()
         {
-            var client = await this._demoRestclient.Create(_baseUrl);
+            var client = this._demoRestclient.Create(_baseUrl);
             var request = this._restRequestFactory.Get("api/opentest");
             var response = client.Execute(request);
             var viewModel = new HomeViewModel { Response = response.Content };
             return View(viewModel);
-        }
-
-        /// <summary>
-        /// The privacy.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="IActionResult"/>.
-        /// </returns>
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         /// <summary>

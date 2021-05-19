@@ -46,9 +46,11 @@ namespace HelmerDemo.WebClient
             services.AddAuthentication(
                 options =>
                     {
-                        options.DefaultScheme = "Cookies";
+                        options.DefaultScheme = "cookie";
                         options.DefaultChallengeScheme = "oidc";
-                    }).AddCookie("cookie").AddOpenIdConnect(
+                    })
+                .AddCookie("cookie")
+                .AddOpenIdConnect(
                 "oidc",
                 options =>
                     {
@@ -56,15 +58,11 @@ namespace HelmerDemo.WebClient
                         options.ClientId = "mvc";
                         options.ClientSecret = "secret";
                         options.ResponseType = "code id_token";
-                        
                         options.RequireHttpsMetadata = false;
                         options.GetClaimsFromUserInfoEndpoint = true;
                         options.SaveTokens = true;
                         options.Scope.Add("api");
-
                     });
-
-                
 
             // Register dependency injection
             services.AddScoped<IDemoRestClient, DemoRestClient>();
